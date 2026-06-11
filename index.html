@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1-2-1 (2) 멍키스패너 학습 스마트 앱</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Malgun Gothic', sans-serif; background-color: #f4f6f9; padding: 10px; display: flex; justify-content: center; }
+        
+        /* 모바일 기기 프레임 구현 */
+        .phone-wrapper {
+            width: 100%;
+            max-width: 340px;
+            background: #ffffff;
+            border: 8px solid #2c3e50;
+            border-radius: 24px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* 상단 타이틀 바 */
+        .app-header { background: #4A90E2; color: white; padding: 14px; text-align: center; font-size: 14px; font-weight: bold; }
+        
+        /* 4대 핵심 영역 탭 바 */
+        .tab-bar { display: flex; background: #eef2f7; border-bottom: 1px solid #ddd; }
+        .tab-btn { flex: 1; padding: 10px 0; text-align: center; font-size: 11px; color: #555; cursor: pointer; border: none; background: none; font-weight: bold; }
+        .tab-btn.active { background: #ffffff; color: #4A90E2; border-bottom: 3px solid #4A90E2; }
+        
+        /* 스크롤 가능한 본문 영역 */
+        .app-body { padding: 12px; overflow-y: auto; max-height: 420px; background: #fafbfc; }
+        .content-panel { display: none; }
+        .content-panel.active { display: block; }
+        
+        /* 콘텐츠 카드 가독성 디자인 */
+        .section-title { font-size: 12px; font-weight: bold; color: #222; margin: 8px 0 5px 0; padding-left: 5px; border-left: 4px solid #4A90E2; }
+        .info-card { background: #ffffff; border: 1px solid #e1e4e8; border-radius: 6px; padding: 10px; margin-bottom: 8px; font-size: 11px; line-height: 1.5; color: #444; }
+        .accent-text { color: #e11d48; font-weight: bold; }
+        .blue-text { color: #2563eb; font-weight: bold; }
+        
+        /* 어휘 테이블 구조 */
+        .word-table { width: 100%; border-collapse: collapse; margin-top: 5px; font-size: 11px; }
+        .word-table th, .word-table td { border: 1px solid #e1e4e8; padding: 6px; text-align: left; }
+        .word-table th { background: #f1f5f9; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="phone-wrapper">
+    <div class="app-header">🎒 비상국어 1-2 [멍키스패너] 학습관</div>
+    
+    <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab(0)">작품 소개</button>
+        <button class="tab-btn" onclick="switchTab(1)">인물 탐구</button>
+        <button class="tab-btn" onclick="switchTab(2)">내용 구성</button>
+        <button class="tab-btn" onclick="switchTab(3)">어휘 정리</button>
+    </div>
+    
+    <div class="app-body">
+        <div class="content-panel active" id="panel-0">
+            <div class="section-title">작품 핵심 개관</div>
+            <div class="info-card">
+                • <strong>갈래:</strong> 현대 소설, 단편 소설, <span class="blue-text">성장 소설</span><br>
+                • <strong>시점:</strong> 1인칭 주인공 시점 ('나'의 심리 직접 서술)<br>
+                • <strong>주제:</strong> 일상의 위기를 스스로 극복하며 얻은 자립심과 주체적 성장
+            </div>
+            <div class="section-title">주요 특징</div>
+            <div class="info-card">
+                • '립밤(장식적 가치)'과 '멍키스패너(자립적 가치)'의 대조를 통해 가치관 성숙 과정을 효과적으로 형상화함.
+            </div>
+        </div>
+        
+        <div class="content-panel" id="panel-1">
+            <div class="section-title">주요 인물 분석</div>
+            <div class="info-card">
+                <strong>👤 한경 ('나')</strong>: 초반엔 사치와 소비에 부풀었으나, 일상의 위기(세면대 고장)를 멍키스패너로 타파하며 주체적인 인물로 성장함.
+            </div>
+            <div class="info-card">
+                <strong>👤 한아 (동생)</strong>: 8살. 언니에게 의존하려다 곁에서 수리를 도우며 "별것도 아니네"를 외치고 동반 성장함.
+            </div>
+            <div class="info-card">
+                <strong>👤 자전거 가게 아저씨</strong>: 과잉보호 대신 묵직한 '멍키스패너'를 빌려주어 스스로 해결할 수 있는 기회를 열어준 건강한 조력자.
+            </div>
+        </div>
+        
+        <div class="content-panel" id="panel-2">
+            <div class="section-title">구성 단계별 사건 정리</div>
+            <div class="info-card">
+                • <strong>발단:</strong> 엄마의 일주일 출장. '나'는 10만 원 소비 계획에 부풀어 있음.<br>
+                • <strong>전개:</strong> 전등이 나가고 세면대가 막힘. 출장 수리비 5만 원 소리에 좌절함.<br>
+                • <strong>위기:</strong> 어른들의 참견을 방어하며 스스로 수리하기로 결심, 멍키스패너를 빌려옴.<br>
+                • <strong>절정:</strong> 수리 영상을 참고하여 배수관을 열고 <span class="accent-text">머리카락 뭉치</span>를 빼내 통쾌하게 뚫음.<br>
+                • <strong>결말:</strong> 자매가 큰 성취감을 맛보고, '나'는 립밤 대신 자신만의 예쁜 멍키스패너를 소장하고 싶어 함.
+            </div>
+        </div>
+        
+        <div class="content-panel" id="panel-3">
+            <div class="section-title">교과서 필수 어휘</div>
+            <table class="word-table">
+                <thead>
+                    <tr><th>어휘</th><th>문맥 속 정의</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>성찰 (省察)</strong></td><td>자신의 마음과 행동을 돌이켜보고 반성함.</td></tr>
+                    <tr><td><strong>내면화 (內面化)</strong></td><td>외부의 가치나 깨달음을 받아들여 마음에 새김.</td></tr>
+                    <tr><td><strong>성숙 (成熟)</strong></td><td>몸과 마음, 인격이 자라서 온전하고 단단해짐.</td></tr>
+                    <tr><td><strong>주체성 (主體性)</strong></td><td>의존하지 않고 자신이 중심이 되어 실천함.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 인터랙티브 탭 메뉴 구동 엔진
+    function switchTab(index) {
+        const tabs = document.querySelectorAll('.tab-btn');
+        tabs.forEach((tab, idx) => {
+            if(idx === index) tab.classList.add('active');
+            else tab.classList.remove('active');
+        });
+        
+        const panels = document.querySelectorAll('.content-panel');
+        panels.forEach((panel, idx) => {
+            if(idx === index) panel.classList.add('active');
+            else panel.classList.remove('active');
+        });
+    }
+</script>
+
+</body>
+</html>
